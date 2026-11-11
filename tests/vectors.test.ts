@@ -117,7 +117,7 @@ test("every case signature verifies against its own canonical bytes", () => {
 });
 
 test("reference signature only verifies for the exact signed invoice", () => {
-  const reference = fromBase64(vectors.reference_signature_base64);
+  const reference = fromBase64(vectors.reference_signature_base64); 
   assert.deepEqual(reference, hexToBytes(vectors.reference_signature_hex));
   const valid = vectors.cases.find((c) => c.name === "valid");
   assert.ok(valid);

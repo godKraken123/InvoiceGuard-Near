@@ -41,11 +41,22 @@ pub const MAX_NETWORK_ID_LEN: usize = 32;
 ///
 /// `available = ledger - reserved - reserve_floor - OPERATIONS_HEADROOM`.
 ///
-/// This buffer covers incremental storage staking for retained state
-/// (payment records, daily entries, vendor records) and miscellaneous
-/// execution costs. NEAR storage staking costs 10^19 yoctoNEAR per byte;
-/// the retained state of this contract is on the order of tens of KB,
-/// i.e. well below this buffer.
+/// SIMPLIFICATION, NOT A GUARANTEE. This is a fixed compile-time constant:
+/// it is not derived from `env::storage_usage()`, not adjusted for actual
+/// gas prices, and not proven sufficient for every load. It is an
+/// engineering estimate for this Testnet prototype, based on the bounded
+/// collections (at most `MAX_VENDORS` vendors, `MAX_PENDING_REQUESTS`
+/// pending requests and `MAX_RETAINED_PAYMENTS` retained payments).
+/// NEAR storage staking costs 10^19 yoctoNEAR per byte, so 1 NEAR covers
+/// roughly 100 KB of state; the normal retained state is well below that.
+///
+/// The bound is NOT unconditional: `trim_old_days` stops at the first day
+/// with an outstanding reservation, and `trim_payment_history` stops at the
+/// first non-terminal payment. A payment stuck in `PROCESSING` (e.g. the
+/// fail-closed callback path) therefore lets daily entries accumulate and
+/// can, over a long enough period, erode this buffer. A production design
+/// would compute the reserve from `env::storage_usage()` and would provide
+/// a way to resolve stuck reservations.
 pub const OPERATIONS_HEADROOM_YOCTONEAR: u128 = 10_u128.pow(24); // 1 NEAR
 
 /// Gas attached to the private transfer-finalization callback.

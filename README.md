@@ -9,6 +9,12 @@ authorized.
 > Contract security does not protect against a malicious full-access account
 > owner. NEAR transfers are asynchronous; callback behavior matters.
 
+See [Trust assumptions](#trust-assumptions) for what is explicitly **not**
+protected: in particular, whoever holds a full-access key to the **contract
+account** can redeploy its code at the NEAR account level, and whoever holds a
+full-access key to the **admin account** can call every admin method. The
+agent's restricted function-call key only constrains the agent.
+
 ## Problem / solution
 
 An agent wallet can be manipulated (prompt injection, compromised workflow)
@@ -37,7 +43,7 @@ into paying an attacker. InvoiceGuard moves the decision to a smart contract:
 | `ts/src/keys.ts` | Ed25519 vendor keys/signatures |
 | `ts/src/sandbox.ts` | Sandbox harness |
 
-## Trust assumptions & security invariants
+## Security invariants
 
 - `env::predecessor_account_id()` is the authorization subject.
 - The signing key and payout account come only from the administrator-managed
@@ -49,8 +55,36 @@ into paying an attacker. InvoiceGuard moves the decision to a smart contract:
 - The private callback finalizes a `PROCESSING` payment exactly once.
 - Replay protection lives in vendor nonces, not in payment history (history is
   trimmed to 100 terminal records).
-- No withdrawal, no self-upgrade, no admin method that edits stored payment
-  fields. There is no way for the agent to change code, keys, or limits.
+- No withdrawal method and **no contract-level self-upgrade method**; no admin
+  method edits stored payment fields. The agent cannot change code, keys, or
+  limits.
+
+## Trust assumptions
+
+These are deliberate boundaries of the threat model, not defects:
+
+1. **Full-access account owners are fully trusted.** The contract has no
+   self-upgrade or withdrawal *method*, but a holder of a full-access key to
+   the **contract account** can redeploy the code via a NEAR `DeployContract`
+   action and drain the balance; a holder of a full-access key to the **admin
+   account** can change limits, the vendor registry, pause state, and approve
+   manual requests. The restricted function-call key only limits the agent.
+   Do not remove or weaken these recovery keys without explicit approval.
+2. **The administrator controls the vendor registry.** `register_vendor`,
+   `set_vendor_payout` and `rotate_vendor_key` are admin-only. A manual
+   request stores `vendor_id`, `amount` and `memo`, but **not** a recipient:
+   the recipient is resolved from the registry at approval time. Therefore
+   `approve_manual_payment(request_id)` cannot be subverted through call
+   parameters, but an admin can change the registered payout between request
+   creation and approval. Both behaviours are intentional (§8.2 of the brief).
+3. **A registered vendor signature proves key authorization, not delivery or
+   service quality.** Recipient binding to the registered payout account is the
+   additional control against a compromised signing key.
+4. **The 1 NEAR operations headroom is a simplification**, not a proof of
+   sufficiency under any load (see [Known limitations](#known-limitations)).
+5. **Asynchronous transfers and callbacks.** A payment is final only after the
+   private callback runs; a callback that fails closed leaves the payment
+   `PROCESSING` with its reservation held.
 
 ## Canonical invoice payload
 
@@ -127,17 +161,33 @@ pending until the admin rejects it. All printed outcomes come from the chain.
 ## Known limitations
 
 - Prototype on Testnet/Sandbox only; no professional audit.
-- The oldest non-terminal payment can temporarily block history trimming.
+- **The 1 NEAR operations headroom is a fixed simplification**, not a
+  guarantee of sufficient storage/gas headroom under any load. It is not
+  computed from `env::storage_usage()` and is not configurable. At
+  `10^19` yoctoNEAR per byte it covers roughly 100 KB of state; normal
+  bounded state is well below that, but the bound is conditional (next item).
+- **State bounds are conditional on reservations resolving.** `trim_old_days`
+  stops at the first day with `reserved > 0` and `trim_payment_history` stops
+  at the first non-terminal payment. A payment stuck in `PROCESSING` (e.g. the
+  fail-closed callback branch) therefore blocks both trimming loops: daily
+  entries and payment records can then accumulate without a bound. This is a
+  liveness/storage-growth caveat, **not** a daily-limit bypass — the limit is
+  always checked against the current day's own entry.
 - Daily `spent` totals for pruned past days are dropped (per-payment records
-  keep the accounting day).
+  keep the accounting day). Views do not roll the UTC day; `today_*` refers to
+  `current_day`, i.e. the day of the last treasury operation.
 - A failed transfer keeps the ledger intact but the nonce stays consumed.
 - The administrator is a single account (no multisig / role hierarchy).
-- The operations headroom (1 NEAR) is a fixed constant, not configurable.
 
 ## Checkpoint status
 
 - **CP0** environment verification: completed and approved.
 - **CP1** contract implementation: implemented; 90 unit tests, 9 vector tests,
   26 Sandbox checks, attack demo all executed successfully.
+- **Pre-CP2 security review** (read-only, no deployment, no code changes):
+  5 areas reviewed; no blockers found; three documentation clarifications
+  applied in CP3.
 - **CP2** Testnet deployment: **not performed** — requires explicit approval.
-- **CP3/CP4** documentation/demo polish and submission: pending.
+- **CP3** documentation: trust assumptions, threat-model boundaries and
+  limitations documented; reproducible instructions in place.
+- **CP4** final demo/submission: pending.
