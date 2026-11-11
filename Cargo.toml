@@ -1,0 +1,14 @@
+[workspace]
+members = ["contract"]
+resolver = "2"
+
+[profile.dev]
+overflow-checks = true
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+debug = false
+panic = "abort"
+overflow-checks = true

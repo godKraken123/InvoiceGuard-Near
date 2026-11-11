@@ -1,0 +1,104 @@
+{
+  "description": "Shared InvoiceGuard canonical-Borsh / Ed25519 vectors. All integers are decimal strings.",
+  "protocol_id": "invoiceguard",
+  "protocol_version": 1,
+  "network_id": "sandbox",
+  "contract_id": "invoiceguard.unit.test.near",
+  "signing_seed_hex": "0101010101010101010101010101010101010101010101010101010101010101",
+  "public_key": "ed25519:AKnL4NNf3DGWZJS6cPknBuEGnVsV4A4m5tgebLHaRSZ9",
+  "public_key_hex": "8a88e3dd7409f195fd52db2d3cba5d72ca6709bf1d94121bf3748801b40f6f5c",
+  "reference_signature_hex": "a56b5ffb2fac53fd72cda5465f1e4754e7d9ccafd43242ce550f29441cfa0387664593c67bf724153566eae7b4cec18a691b926ae52cac539ae164b0c7d72703",
+  "reference_signature_base64": "pWtf+y+sU/1yzaVGXx5HVOfZzK/UMkLOVQ8pRBz6A4dmRZPGe/ckFTVm6ue0zsGKaRuSauUsrFOa4WSwx9cnAw==",
+  "cases": [
+    {
+      "name": "valid",
+      "invoice": {
+        "protocol_id": "invoiceguard",
+        "protocol_version": 1,
+        "network_id": "sandbox",
+        "contract_id": "invoiceguard.unit.test.near",
+        "vendor_id": "vendor.unit.test.near",
+        "nonce": "7",
+        "recipient": "payout.unit.test.near",
+        "amount": "42424242424242424242",
+        "expiration_unix_sec": "1893456000"
+      },
+      "canonical_hex": "0c000000696e766f6963656775617264010000000700000073616e64626f781b000000696e766f69636567756172642e756e69742e746573742e6e6561721500000076656e646f722e756e69742e746573742e6e6561720700000000000000150000007061796f75742e756e69742e746573742e6e656172b2c9062ab62fc14c020000000000000080d8db7000000000",
+      "signature_hex": "a56b5ffb2fac53fd72cda5465f1e4754e7d9ccafd43242ce550f29441cfa0387664593c67bf724153566eae7b4cec18a691b926ae52cac539ae164b0c7d72703",
+      "signature_base64": "pWtf+y+sU/1yzaVGXx5HVOfZzK/UMkLOVQ8pRBz6A4dmRZPGe/ckFTVm6ue0zsGKaRuSauUsrFOa4WSwx9cnAw==",
+      "domain_error": null
+    },
+    {
+      "name": "changed_amount",
+      "invoice": {
+        "protocol_id": "invoiceguard",
+        "protocol_version": 1,
+        "network_id": "sandbox",
+        "contract_id": "invoiceguard.unit.test.near",
+        "vendor_id": "vendor.unit.test.near",
+        "nonce": "7",
+        "recipient": "payout.unit.test.near",
+        "amount": "42424242424242424243",
+        "expiration_unix_sec": "1893456000"
+      },
+      "canonical_hex": "0c000000696e766f6963656775617264010000000700000073616e64626f781b000000696e766f69636567756172642e756e69742e746573742e6e6561721500000076656e646f722e756e69742e746573742e6e6561720700000000000000150000007061796f75742e756e69742e746573742e6e656172b3c9062ab62fc14c020000000000000080d8db7000000000",
+      "signature_hex": "77e1d3773281a7723a45d26b0f47321a9a8172c9da145b001b15c54aec8ddbd5717c9577de5bc615c93a5eb0ae20352e664afe9fb801b3b14b5f3986b89b3f08",
+      "signature_base64": "d+HTdzKBp3I6RdJrD0cyGpqBcsnaFFsAGxXFSuyN29VxfJV33lvGFck6XrCuIDUuZkr+n7gBs7FLXzmGuJs/CA==",
+      "domain_error": null
+    },
+    {
+      "name": "changed_recipient",
+      "invoice": {
+        "protocol_id": "invoiceguard",
+        "protocol_version": 1,
+        "network_id": "sandbox",
+        "contract_id": "invoiceguard.unit.test.near",
+        "vendor_id": "vendor.unit.test.near",
+        "nonce": "7",
+        "recipient": "payout2.unit.test.near",
+        "amount": "42424242424242424242",
+        "expiration_unix_sec": "1893456000"
+      },
+      "canonical_hex": "0c000000696e766f6963656775617264010000000700000073616e64626f781b000000696e766f69636567756172642e756e69742e746573742e6e6561721500000076656e646f722e756e69742e746573742e6e6561720700000000000000160000007061796f7574322e756e69742e746573742e6e656172b2c9062ab62fc14c020000000000000080d8db7000000000",
+      "signature_hex": "ca53f1f4fa8034a8c3252314e206e9c872475645112ab534799e39ca670b9d0bca61c323198cbfba536a1bb0ba5a39565f23d8ace1501bd4a851ffe393f58001",
+      "signature_base64": "ylPx9PqANKjDJSMU4gbpyHJHVkURKrU0eZ45ymcLnQvKYcMjGYy/ulNqG7C6WjlWXyPYrOFQG9SoUf/jk/WAAQ==",
+      "domain_error": null
+    },
+    {
+      "name": "changed_network",
+      "invoice": {
+        "protocol_id": "invoiceguard",
+        "protocol_version": 1,
+        "network_id": "testnet",
+        "contract_id": "invoiceguard.unit.test.near",
+        "vendor_id": "vendor.unit.test.near",
+        "nonce": "7",
+        "recipient": "payout.unit.test.near",
+        "amount": "42424242424242424242",
+        "expiration_unix_sec": "1893456000"
+      },
+      "canonical_hex": "0c000000696e766f69636567756172640100000007000000746573746e65741b000000696e766f69636567756172642e756e69742e746573742e6e6561721500000076656e646f722e756e69742e746573742e6e6561720700000000000000150000007061796f75742e756e69742e746573742e6e656172b2c9062ab62fc14c020000000000000080d8db7000000000",
+      "signature_hex": "cd88e14024e6f4a84c75198c0cacb84f74d6752fda054b5d1b3e0da53aef97a61ec9e486a97248efb0c06520128d48fc1cbc9646e9944022304246465fbf5504",
+      "signature_base64": "zYjhQCTm9KhMdRmMDKy4T3TWdS/aBUtdGz4NpTrvl6YeyeSGqXJI77DAZSASjUj8HLyWRumUQCIwQkZGX79VBA==",
+      "domain_error": "E_DOMAIN_NETWORK"
+    },
+    {
+      "name": "changed_contract",
+      "invoice": {
+        "protocol_id": "invoiceguard",
+        "protocol_version": 1,
+        "network_id": "sandbox",
+        "contract_id": "other.unit.test.near",
+        "vendor_id": "vendor.unit.test.near",
+        "nonce": "7",
+        "recipient": "payout.unit.test.near",
+        "amount": "42424242424242424242",
+        "expiration_unix_sec": "1893456000"
+      },
+      "canonical_hex": "0c000000696e766f6963656775617264010000000700000073616e64626f78140000006f746865722e756e69742e746573742e6e6561721500000076656e646f722e756e69742e746573742e6e6561720700000000000000150000007061796f75742e756e69742e746573742e6e656172b2c9062ab62fc14c020000000000000080d8db7000000000",
+      "signature_hex": "5b5ba9e617c978fe93d93e9814682e009860372893d8adc8d75ef80e47e1e809caefccf5895c9756ff11f906510e5c1f12c0794df34a5246e040a4a36a8b1b0b",
+      "signature_base64": "W1up5hfJeP6T2T6YFGguAJhgNyiT2K3I1174Dkfh6AnK78z1iVyXVv8R+QZRDlwfEsB5TfNKUkbgQKSjaosbCw==",
+      "domain_error": "E_DOMAIN_CONTRACT"
+    }
+  ]
+}

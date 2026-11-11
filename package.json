@@ -1,0 +1,27 @@
+{
+  "name": "invoiceguard-ts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "InvoiceGuard TypeScript signing, vectors, and sandbox integration tests",
+  "scripts": {
+    "build:wasm": "RUSTFLAGS=\"--cfg near\" cargo build --target wasm32-unknown-unknown --release",
+    "test:unit": "cargo test",
+    "vectors": "tsx scripts/gen-vectors.ts",
+    "test:vectors": "tsx --test tests/vectors.test.ts",
+    "test:sandbox": "tsx scripts/sandbox-test.ts",
+    "demo": "tsx scripts/demo.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bs58": "6.0.0",
+    "near-api-js": "5.1.0",
+    "near-sandbox": "0.3.5",
+    "tweetnacl": "1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  }
+}
