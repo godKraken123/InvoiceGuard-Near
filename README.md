@@ -6,24 +6,7 @@ InvoiceGuard is an on-chain payment authorization layer for AI agents on NEAR.
 The agent may *request* a payment; a smart contract independently decides
 whether that payment is authorized. Even a fully manipulated agent cannot make
 the treasury pay outside the contract's rules.
-
-> **This project is demonstrated in a local NEAR Sandbox only — not in
-> Testnet and not in Mainnet.** CP2 (Testnet deployment) was deliberately
-> skipped. No real accounts, wallets, credentials or public-network
-> transactions are used anywhere in this repository.
->
-> **Testnet prototype. Not audited. Not production-ready.** A valid vendor
-> signature proves authorization by the registered key, not delivery of goods
-> or service quality. Contract security does not protect against a malicious
-> full-access account owner. NEAR transfers are asynchronous; callback
-> behaviour matters.
-
-**Repository:** https://github.com/godKraken123/InvoiceGuard-Near.git
-
-Submission and presentation materials: [`docs/SUBMISSION.md`](docs/SUBMISSION.md),
-[`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md).
-Four judge-facing screenshots (verbatim output of `npm run demo`):
-[`docs/screenshots/`](docs/screenshots/).
+https://x.com/qmzpalraf/status/2121011081216917895
 
 ---
 
