@@ -191,17 +191,17 @@ Not Testnet. Not audited. This shows payment constraints holding even when the
 agent is manipulated — not a claim that prompt injection is "solved".
 
 90 unit tests · 9 shared Rust↔TS vectors · 26 Sandbox checks
-[repo link] [demo video]
+github.com/godKraken123/InvoiceGuard-Near [demo video]
 #NEARHackathon #NEARProtocol #SmartContracts #AISecurity
 ```
 
 ## 10. Submission checklist (for the human owner)
 
-- [ ] Public repository URL (not published yet)
+- [x] Public repository: https://github.com/godKraken123/InvoiceGuard-Near.git
 - [ ] 2–3 minute demo video (not recorded yet)
-- [ ] Short description above + tagline
-- [ ] Track: Security (AI Security & Defense), secondary: Agents
-- [ ] `npm run build:wasm` + `npm run demo` reproduction confirmed
-- [ ] Confirm no secrets / credentials before publishing
+- [x] Short description above + tagline
+- [x] Track: Security (AI Security & Defense), secondary: Agents
+- [x] `npm run build:wasm` + `npm run demo` reproduction confirmed
+- [x] Confirm no secrets / credentials before publishing
 - [x] MIT LICENSE added; `license = "MIT"` in `contract/Cargo.toml` and `package.json`
-- [ ] Explicit approval before publishing the repo, X post or submission
+- [ ] Explicit approval before the X post and the hackathon submission

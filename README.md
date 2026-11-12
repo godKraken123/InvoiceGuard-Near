@@ -18,6 +18,8 @@ the treasury pay outside the contract's rules.
 > full-access account owner. NEAR transfers are asynchronous; callback
 > behaviour matters.
 
+**Repository:** https://github.com/godKraken123/InvoiceGuard-Near.git
+
 Submission and presentation materials: [`docs/SUBMISSION.md`](docs/SUBMISSION.md),
 [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md).
 
@@ -341,4 +343,6 @@ professional audit; guarantee production-grade storage/gas headroom.
 - **Pre-CP2 security review**: read-only, 5 areas reviewed, no blockers.
 - **CP2 Testnet deployment**: **skipped by decision** — never performed.
 - **CP3** documentation: complete.
-- **CP4** submission: materials prepared, **not submitted / not published**.
+- **CP4** final demo/submission: repository published at
+  https://github.com/godKraken123/InvoiceGuard-Near.git ; demo video, X post
+  and hackathon submission **not yet done**.
