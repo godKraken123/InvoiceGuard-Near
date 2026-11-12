@@ -22,6 +22,8 @@ the treasury pay outside the contract's rules.
 
 Submission and presentation materials: [`docs/SUBMISSION.md`](docs/SUBMISSION.md),
 [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md).
+Four judge-facing screenshots (verbatim output of `npm run demo`):
+[`docs/screenshots/`](docs/screenshots/).
 
 ---
 

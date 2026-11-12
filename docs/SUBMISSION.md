@@ -202,6 +202,7 @@ github.com/godKraken123/InvoiceGuard-Near [demo video]
 - [x] Short description above + tagline
 - [x] Track: Security (AI Security & Defense), secondary: Agents
 - [x] `npm run build:wasm` + `npm run demo` reproduction confirmed
+- [x] 4 judge-facing screenshots prepared in `docs/screenshots/` (PNG, < 200 KB each)
 - [x] Confirm no secrets / credentials before publishing
 - [x] MIT LICENSE added; `license = "MIT"` in `contract/Cargo.toml` and `package.json`
 - [ ] Explicit approval before the X post and the hackathon submission
