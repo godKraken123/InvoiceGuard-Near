@@ -2,6 +2,7 @@
   "name": "invoiceguard-ts",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "InvoiceGuard TypeScript signing, vectors, and sandbox integration tests",
   "scripts": {
