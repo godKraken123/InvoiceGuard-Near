@@ -203,5 +203,5 @@ agent is manipulated — not a claim that prompt injection is "solved".
 - [ ] Track: Security (AI Security & Defense), secondary: Agents
 - [ ] `npm run build:wasm` + `npm run demo` reproduction confirmed
 - [ ] Confirm no secrets / credentials before publishing
-- [ ] Decide on a LICENSE file (see final report; not added yet)
+- [x] MIT LICENSE added; `license = "MIT"` in `contract/Cargo.toml` and `package.json`
 - [ ] Explicit approval before publishing the repo, X post or submission
