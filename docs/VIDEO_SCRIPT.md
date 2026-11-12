@@ -12,6 +12,20 @@ or "audited". A persistent small caption should read:
 outcomes, no pre-rendered "SUCCESS" slides. Show the real `npm run demo`
 output and the real contract error codes.
 
+**Static cards (already generated, 1920×1080 PNG, in `docs/video-cards/`):**
+
+| File | When on screen | Purpose |
+|---|---|---|
+| `video-01-problem.png` | 0:00–0:10 | Problem: an agent with a wallet can be manipulated |
+| `video-02-injection.png` | 0:10–0:20 | The malicious instruction + honest "does NOT stop injection" framing |
+| `video-03-architecture.png` | 0:20–0:50 | Architecture diagram: vendor / agent / admin → contract → payout |
+| `video-04-endcard.png` | 2:15–2:40 | Results, test counts, disclaimers, thesis |
+
+These cards are **explanatory only**. They contain no transaction outcomes —
+every ACCEPTED / REJECTED / status line must come from the live terminal
+recording, not from a card. All four carry the permanent caption
+`LOCAL NEAR SANDBOX — NOT TESTNET / MAINNET`.
+
 ---
 
 ## Block 1 — 0:00–0:20 · Problem (15–20 s)
@@ -35,21 +49,10 @@ output and the real contract error codes.
 ## Block 2 — 0:20–0:50 · Architecture (20–30 s)
 
 **On screen**
-- One static diagram (can be drawn in advance, it is explanatory, not a
-  fabricated result):
-
-```
-Vendor ──Ed25519 signs Borsh invoice──┐
-Agent (restricted key) ───────────────┼──> InvoiceGuard contract
-                                      │      · verify signature + domain
-Admin ──registry / limits / approvals─┘      · payout binding + nonce
-              │                              · ledger, limits, reservations
-              └───────────────────────────── Promise::transfer + private callback
-                                                   │
-                                            Registered payout
-```
-
-- Caption: `The contract decides. Not the agent.`
+- `docs/video-cards/video-01-problem.png` (0:00–0:10)
+- `docs/video-cards/video-02-injection.png` (0:10–0:20)
+- `docs/video-cards/video-03-architecture.png` (0:20–0:50) — the diagram is a
+  prepared explanatory card, not a fabricated result.
 
 **Narration**
 > "InvoiceGuard moves the decision into a NEAR smart contract. A registered
@@ -104,11 +107,9 @@ generated from real responses, so it is safe to show.
 
 **On screen**
 - Final block of `npm run demo`: `ledger_balance: 98…000`, `total_reserved: 0`,
-  `attacker balance unchanged: true`, `Demo assertions passed`.
-- End card:
-  `A compromised agent should not become a compromised treasury.`
-  `90 unit tests · 9 shared Rust↔TS vectors · 26 Sandbox checks`
-  `Local NEAR Sandbox prototype — not audited — not Testnet/Mainnet`
+  `attacker balance unchanged: true`, `Demo assertions passed` (real output).
+- Then `docs/video-cards/video-04-endcard.png`: results, test counts,
+  disclaimers and the thesis.
 
 **Narration**
 > "Only the two authorized payments left the treasury. The attacker's balance
