@@ -78,21 +78,44 @@ The agent cannot approve its own request. This path is never represented as a ve
 
 ## How it works
 
-```mermaid
-flowchart TB
-    V["Registered Vendor<br/>Ed25519 signature over canonical Borsh invoice"]
-    AG["AI Agent<br/>restricted function-call key"]
-    AD["Administrator<br/>registry · limits · approvals · pause"]
-    C["InvoiceGuard contract<br/>signature + domain validation<br/>payout binding · nonce · expiration<br/>per-payment + daily limits<br/>ledger + reservations"]
-    TR["Promise::transfer + private callback<br/>PAID: ledger debited / FAILED: reservation released"]
-    P["Registered payout account"]
-
-    V -->|"signed invoice"| AG
-    AG -->|"pay_invoice"| C
-    AG -->|"request_manual_payment → pending_approval"| C
-    AD -->|"approve_manual_payment(request_id)"| C
-    AD -->|"register / configure"| C
-    C --> TR --> P
+```text
+        REGISTERED VENDOR
+  (Ed25519 signature over canonical Borsh invoice)
+                 |
+          signed invoice
+                 v
+           +-----------+
+           |  AI AGENT |   restricted function-call key
+           +-----------+
+                 |
+      +----------+-----------------------+
+      |                                  |
+   pay_invoice                request_manual_payment
+      |                                  |
+      |                           pending_approval
+      |                                  ^
+      |                                  | approve / reject (request_id only)
+      |                         +----------------+
+      |                         | ADMINISTRATOR  |  registry / limits / pause
+      |                         +----------------+
+      v                                  |
++---------------------------------------------------------------+
+|                  INVOICEGUARD CONTRACT                        |
+|                                                               |
+|    signature + domain (protocol / version / network / contract)|
+|    registered payout binding                                  |
+|    nonce + expiration                                         |
+|    per-payment + daily limits                                 |
+|    internal ledger + reservations                             |
++---------------------------------------------------------------+
+                 |
+                 v
+    Promise::transfer  -->  registered payout account
+                 |
+                 v
+    #[private] callback
+      PAID   -> ledger debited, daily spending updated
+      FAILED -> reservation released, ledger unchanged
 ```
 
 The contract is the final authorization layer. The agent can initiate requests, but it cannot override the contract's rules. Both payment paths converge on a single registered payout destination — an attacker-controlled address is never a valid recipient.
