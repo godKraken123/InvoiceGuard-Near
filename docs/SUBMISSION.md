@@ -176,24 +176,28 @@ walkthrough.
 
 ## 9. X post draft (do not publish yet)
 
+**Free X account limits:** 280 weighted characters per post, every URL counts
+as 23 characters (t.co), emoji count as 2, and attached images/video cost 0
+characters. A free account also caps video uploads at **140 s (2:20)** — the
+2:40 demo video does NOT fit; either trim it or attach the 4 screenshots
+instead (up to 4 images are allowed and they cost no characters).
+
+Recommended post: **265 / 280 weighted characters** (15 left).
+
 ```
 A compromised agent should not become a compromised treasury.
 
-InvoiceGuard is a NEAR smart contract that decides whether an AI agent's
-payment is authorized — not the agent. Vendor-signed invoices (Ed25519 over
-canonical Borsh) and admin-approved manual requests stay strictly separate.
+InvoiceGuard: a NEAR contract decides if an agent payment is authorized, not the agent.
 
-Local NEAR Sandbox demo, 8 real scenarios: forged, tampered, redirected,
-replayed, expired and over-limit invoices all rejected; a failed transfer
-rolls back the reservation; attacker balance unchanged.
+8 real Sandbox scenarios, all attacks rejected. Not Testnet. Not audited.
 
-Not Testnet. Not audited. This shows payment constraints holding even when the
-agent is manipulated — not a claim that prompt injection is "solved".
-
-90 unit tests · 9 shared Rust↔TS vectors · 26 Sandbox checks
-github.com/godKraken123/InvoiceGuard-Near [demo video]
-#NEARHackathon #NEARProtocol #SmartContracts #AISecurity
+https://github.com/godKraken123/InvoiceGuard-Near
+#NEARHackathon
 ```
+
+Attach the four PNGs in `docs/screenshots/` (real `npm run demo` output).
+Do not add a second link or extra hashtags — there is no room. Do not call
+this a Testnet deployment, and do not claim prompt injection is "solved".
 
 ## 10. Submission checklist (for the human owner)
 
